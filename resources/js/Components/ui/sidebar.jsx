@@ -355,9 +355,6 @@ const SidebarContent = React.forwardRef(({ className, ...props }, ref) => {
 SidebarContent.displayName = "SidebarContent"
 
 
-
-
-
 const SidebarGroup = React.forwardRef(({ className, ...props }, ref) => {
   return (
     <div
