@@ -42,10 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 //Result
-Route::get('/result', [ResultController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('result');
-
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/result', [ResultController::class, 'index'])->name('result');
+    Route::get('/result_by_judges', [ResultController::class, 'byJudges'])->name('result_by_judges');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

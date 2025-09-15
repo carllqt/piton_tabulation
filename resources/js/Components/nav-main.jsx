@@ -27,8 +27,9 @@ export function NavMain({ items }) {
       <SidebarGroupLabel className="text-white">Categories</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
+          const currentPath = new URL(window.location.href).pathname
           const isActive =
-            new URL(item.url, window.location.origin).pathname === url
+            new URL(item.url, window.location.origin).pathname === currentPath
 
           return item.items && item.items.length > 0 ? (
             <Collapsible

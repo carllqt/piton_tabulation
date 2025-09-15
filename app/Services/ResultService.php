@@ -75,4 +75,32 @@ class ResultService
 
         return $results;
     }
+
+    public function computeResultsByCategory(string $category): Collection
+    {
+        $contestants = Contestant::with(['scores.judge'])->get();
+
+        return $contestants->map(function ($contestant) use ($category) {
+            $row = [
+                'contestant_id' => $contestant->id,
+                'name' => $contestant->first_name . ' ' . $contestant->last_name,
+                'gender' => $contestant->gender,
+                'image' => $contestant->profile_image,
+                'scores' => [],
+                'total' => 0,
+            ];
+
+            foreach ($contestant->scores as $index => $score) {
+                $value = $score->$category ?? 0;
+
+                // Force key like Judge 1, Judge 2, ...
+                $judgeLabel = "Judge " . ($index + 1);
+
+                $row['scores'][$judgeLabel] = $value;
+                $row['total'] += $value;
+            }
+
+            return $row;
+        });
+    }
 }
