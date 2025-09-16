@@ -1,6 +1,6 @@
 import React from "react";
 import { PageLayout } from "@/Layouts/PageLayout";
-import { router } from "@inertiajs/react"; 
+import { router } from "@inertiajs/react";
 import {
     Table,
     TableBody,
@@ -9,6 +9,17 @@ import {
     TableRow,
     TableCell,
 } from "@/components/ui/table";
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { Button } from "@/components/ui/button";
 
 const categories = [
     { key: "school_uniform", label: "School Uniform" },
@@ -23,10 +34,13 @@ const ResultByJudges = ({ auth, results = [], category }) => {
     const user = auth?.user;
     const breadcrumbs = [{ label: "Result Per Judges", href: "#" }];
 
-    const handleCategoryChange = (e) => {
-        const newCategory = e.target.value;
-        router.get(route("result_by_judges"), { category: newCategory }, { preserveState: true });
-    };
+  const handleCategoryChange = (newCategory) => {
+    router.get(
+      route("result_by_judges"),
+      { category: newCategory },
+      { preserveState: true }
+    );
+  };
 
     const judgeLabels = ["Judge 1", "Judge 2", "Judge 3", "Judge 4", "Judge 5"];
 
@@ -79,25 +93,32 @@ const ResultByJudges = ({ auth, results = [], category }) => {
         </div>
     );
 
+    const currentCategoryLabel =
+        categories.find((cat) => cat.key === category)?.label || "Select Category";
+
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold">Result Per Judges</h2>
-
-                <select
-                    value={category}
-                    onChange={handleCategoryChange}
-                    className="border rounded px-3 py-2"
-                >
-                    {categories.map((cat) => (
-                        <option key={cat.key} value={cat.key}>
-                            {cat.label}
-                        </option>
-                    ))}
-                </select>
+                <h2 className="text-2xl font-bold">Result Per Judges - {currentCategoryLabel}</h2>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="yellow">{currentCategoryLabel}</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                        <DropdownMenuLabel>Categories</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        {categories.map((cat) => (
+                            <DropdownMenuItem
+                                key={cat.key}
+                                onClick={() => handleCategoryChange(cat.key)}
+                            >
+                                {cat.label}
+                            </DropdownMenuItem>
+                        ))}
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
-            {/* Male first, then Female */}
             {renderTable("Male Contestants", maleResults)}
             {renderTable("Female Contestants", femaleResults)}
         </PageLayout>

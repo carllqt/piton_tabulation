@@ -1,14 +1,14 @@
-import React from "react"
-import { PageLayout } from "@/Layouts/PageLayout"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { useScores } from "@/hooks/useScores"
-import { ScoreTab } from "@/Layouts/ScoreTab"
+import React from "react";
+import { PageLayout } from "@/Layouts/PageLayout";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useScores } from "@/hooks/useScores";
+import { ScoreTab } from "@/Layouts/ScoreTab";
 
 const QandA = ({ auth, contestants, existingScores }) => {
-    const user = auth?.user
-    const breadcrumbs = [{ label: "Q and A", href: "#" }]
-    const maxScore = 20
-    const endpoint = "/q_and_a_scores"
+    const user = auth?.user;
+    const breadcrumbs = [{ label: "Q and A", href: "#" }];
+    const maxScore = 20;
+    const endpoint = "/q_and_a_scores";
 
     const {
         scores,
@@ -19,18 +19,18 @@ const QandA = ({ auth, contestants, existingScores }) => {
         isSubmitted,
         maleContestants,
         femaleContestants,
-    } = useScores({ contestants, existingScores, maxScore, endpoint })
+    } = useScores({ contestants, existingScores, maxScore, endpoint });
 
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
             <div className="flex justify-center items-start">
-                <div className="w-1/2">
+                <div className="w-full">
                     <div className="mb-4">
-                        <h2 className="text-2xl font-bold text-center">Q and A 20%</h2>
+                        <h2 className="text-2xl font-bold">Q and A 20%</h2>
                     </div>
 
                     <Tabs defaultValue="male" className="w-full">
-                        <div className="border rounded-xl bg-blue-400 p-6">
+                        <div className="border rounded-xl bg-blue-400 p-4">
                             <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-6">
                                 <TabsTrigger
                                     value="male"
@@ -76,7 +76,7 @@ const QandA = ({ auth, contestants, existingScores }) => {
                 </div>
             </div>
         </PageLayout>
-    )
-}
+    );
+};
 
-export default QandA
+export default QandA;

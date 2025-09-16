@@ -1,14 +1,14 @@
-import React from "react"
-import { PageLayout } from "@/Layouts/PageLayout"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { useScores } from "@/hooks/useScores"
-import { ScoreTab } from "@/Layouts/ScoreTab"
+import React from "react";
+import { PageLayout } from "@/Layouts/PageLayout";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useScores } from "@/hooks/useScores";
+import { ScoreTab } from "@/Layouts/ScoreTab";
 
 const FilBarong = ({ auth, contestants, existingScores }) => {
-    const user = auth?.user
-    const breadcrumbs = [{ label: "Filipiniana / Barong", href: "#" }]
-    const maxScore = 25
-    const endpoint = "/filipiniana_barong_scores"
+    const user = auth?.user;
+    const breadcrumbs = [{ label: "Filipiniana / Barong", href: "#" }];
+    const maxScore = 25;
+    const endpoint = "/filipiniana_barong_scores";
 
     const {
         scores,
@@ -19,23 +19,31 @@ const FilBarong = ({ auth, contestants, existingScores }) => {
         isSubmitted,
         maleContestants,
         femaleContestants,
-    } = useScores({ contestants, existingScores, maxScore, endpoint })
+    } = useScores({ contestants, existingScores, maxScore, endpoint });
 
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
             <div className="flex justify-center items-start">
-                <div className="w-1/2">
+                <div className="w-full">
                     <div className="mb-4">
-                        <h2 className="text-2xl font-bold text-center">Filipiniana / Barong 25%</h2>
+                        <h2 className="text-2xl font-bold">
+                            Filipiniana / Barong 25%
+                        </h2>
                     </div>
 
                     <Tabs defaultValue="male" className="w-full">
-                        <div className="border rounded-xl bg-blue-400 p-6">
+                        <div className="border rounded-xl bg-blue-400 p-4">
                             <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-6">
-                                <TabsTrigger value="male" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-lg">
+                                <TabsTrigger
+                                    value="male"
+                                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-lg"
+                                >
                                     Male
                                 </TabsTrigger>
-                                <TabsTrigger value="female" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-lg">
+                                <TabsTrigger
+                                    value="female"
+                                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-lg"
+                                >
                                     Female
                                 </TabsTrigger>
                             </TabsList>
@@ -70,7 +78,7 @@ const FilBarong = ({ auth, contestants, existingScores }) => {
                 </div>
             </div>
         </PageLayout>
-    )
-}
+    );
+};
 
-export default FilBarong
+export default FilBarong;

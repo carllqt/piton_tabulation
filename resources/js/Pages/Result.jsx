@@ -11,13 +11,16 @@ import {
     TableCell,
 } from "@/components/ui/table";
 
+import { Button } from "@/Components/ui/button";
+
 const Result = ({ auth, results = {} }) => {
     const user = auth?.user;
     const breadcrumbs = [{ label: "Result", href: "#" }];
     const maleResults = results.male || [];
     const femaleResults = results.female || [];
 
-    const resultRef = useRef();
+    const maleRef = useRef();
+    const femaleRef = useRef();
 
     const renderTable = (list) => (
         <Table className="mb-8">
@@ -65,13 +68,13 @@ const Result = ({ auth, results = {} }) => {
         </Table>
     );
 
-    const handlePrintPDF = () => {
-        if (!resultRef.current) return;
+    const handlePrintPDF = (ref, filename) => {
+        if (!ref.current) return;
 
-        const element = resultRef.current;
+        const element = ref.current;
         const options = {
             margin: 0.5,
-            filename: "contest_results.pdf",
+            filename,
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
@@ -82,19 +85,25 @@ const Result = ({ auth, results = {} }) => {
 
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
-            <div className="flex justify-end mb-4">
-                <button
-                    onClick={handlePrintPDF}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            <div className="flex gap-4 justify-end mb-4">
+                <Button variant="green"
+                    onClick={() => handlePrintPDF(maleRef, "male_results.pdf")}
                 >
-                    Print Result
-                </button>
+                    Print Male Results
+                </Button>
+                <Button variant="pink"
+                    onClick={() => handlePrintPDF(femaleRef, "female_results.pdf")}
+                >
+                    Print Female Results
+                </Button>
             </div>
 
-            <div ref={resultRef}>
+            <div ref={maleRef} className="mb-12">
                 <h2 className="text-2xl font-bold mb-4 text-center">Male Contestants</h2>
                 {renderTable(maleResults)}
+            </div>
 
+            <div ref={femaleRef}>
                 <h2 className="text-2xl font-bold mb-4 text-center">Female Contestants</h2>
                 {renderTable(femaleResults)}
             </div>
