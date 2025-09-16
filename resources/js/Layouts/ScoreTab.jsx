@@ -72,6 +72,7 @@ export const ScoreTab = ({
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
                         <Button
+                            variant="darkBlue"
                             disabled={
                                 !isComplete(gender) || isSubmitted(gender)
                             }
