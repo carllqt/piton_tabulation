@@ -30,7 +30,7 @@ class ScoreController extends Controller
             $score->{$column} = $scoreValue;
 
             // calculate total BEFORE save
-            $score->total_scores = 
+            $score->total_scores =
                 ($score->school_uniform ?? 0) +
                 ($score->sports ?? 0) +
                 ($score->sptve ?? 0) +
@@ -42,7 +42,7 @@ class ScoreController extends Controller
         }
     }
 
-        // School Uniform
+    // School Uniform
     public function store_School_Uniform(Request $request)
     {
         $this->validateScores($request, 10);
@@ -52,7 +52,7 @@ class ScoreController extends Controller
         return redirect()->back()->with('success', 'School uniform scores saved successfully!');
     }
 
-        // Sports
+    // Sports
     public function store_Sports(Request $request)
     {
         $this->validateScores($request, 10);
@@ -62,7 +62,7 @@ class ScoreController extends Controller
         return redirect()->back()->with('success', 'Sports scores saved successfully!');
     }
 
-        // SPTVE
+    // SPTVE
     public function store_Sptve(Request $request)
     {
         $this->validateScores($request, 15);
@@ -72,7 +72,7 @@ class ScoreController extends Controller
         return redirect()->back()->with('success', 'SPTVE scores saved successfully!');
     }
 
-        // Filipiniana / Barong
+    // Filipiniana / Barong
     public function store_Filipiniana_Barong(Request $request)
     {
         $this->validateScores($request, 25);
@@ -82,7 +82,7 @@ class ScoreController extends Controller
         return redirect()->back()->with('success', 'Filipiniana/Barong scores saved successfully!');
     }
 
-        // Q and A
+    // Q and A
     public function store_Q_and_A(Request $request)
     {
         $this->validateScores($request, 20);
@@ -92,7 +92,7 @@ class ScoreController extends Controller
         return redirect()->back()->with('success', 'Q & A scores saved successfully!');
     }
 
-        // Stage Presence
+    // Stage Presence
     public function store_Stage_Presence(Request $request)
     {
         $this->validateScores($request, 20);

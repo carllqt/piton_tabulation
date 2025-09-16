@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ContestantController extends Controller
 {
-    private function renderCategory($view, $column) {
+    private function renderCategory($view, $column)
+    {
         $user = Auth::user();
         $contestants = Contestant::all();
         $existingScores = Score::where('judge_id', $user->id)
@@ -23,27 +24,33 @@ class ContestantController extends Controller
         ]);
     }
 
-    public function schoolUniform() {
+    public function schoolUniform()
+    {
         return $this->renderCategory('Categories/SchoolUniform', 'school_uniform');
     }
 
-    public function sports() {
+    public function sports()
+    {
         return $this->renderCategory('Categories/Sports', 'sports');
     }
 
-    public function sptve() {
+    public function sptve()
+    {
         return $this->renderCategory('Categories/Sptve', 'sptve');
     }
 
-    public function filipiniana_barong() {
+    public function filipiniana_barong()
+    {
         return $this->renderCategory('Categories/FilBarong', 'filipiniana_barong');
     }
 
-    public function q_and_a() {
+    public function q_and_a()
+    {
         return $this->renderCategory('Categories/QandA', 'q_and_a');
     }
 
-    public function stage_presence() {
+    public function stage_presence()
+    {
         return $this->renderCategory('Categories/StagePresence', 'stage_presence');
     }
 }

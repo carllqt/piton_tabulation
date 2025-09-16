@@ -37,9 +37,9 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
 
-    const handleLogout = () => {
-      router.post(route("logout")) // Laravel logout route
-    }
+  const handleLogout = () => {
+    router.post(route("logout")) // Laravel logout route
+  }
 
   return (
     <SidebarMenu>
