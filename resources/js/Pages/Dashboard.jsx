@@ -28,7 +28,10 @@ export default function Dashboard({ auth }) {
                         <img
                             src="/PITON LOGO.png"
                             alt="PITON Logo"
-                            className="w-32 h-32 object-contain drop-shadow-lg"
+                            className="
+                                w-32 h-32 object-contain
+                                [filter:drop-shadow(0_0_6px_rgba(250,204,21,0.6))_drop-shadow(0_0_12px_rgba(250,204,21,0.4))_drop-shadow(0_0_20px_rgba(250,204,21,0.2))]
+                            "
                         />
 
                         {/* 🔹 Title text */}
