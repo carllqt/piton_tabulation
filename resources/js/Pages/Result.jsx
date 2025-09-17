@@ -10,7 +10,6 @@ import {
     TableRow,
     TableCell,
 } from "@/components/ui/table";
-
 import { Button } from "@/Components/ui/button";
 
 const Result = ({ auth, results = {} }) => {
@@ -32,7 +31,7 @@ const Result = ({ auth, results = {} }) => {
                     <TableHead className="text-white">Sports</TableHead>
                     <TableHead className="text-white">SPTVE</TableHead>
                     <TableHead className="text-white">Fil/Barong</TableHead>
-                    <TableHead className="text-white">Q&A</TableHead>
+                    <TableHead className="text-white">Q&amp;A</TableHead>
                     <TableHead className="text-white">Stage Presence</TableHead>
                     <TableHead className="text-white">Total</TableHead>
                     <TableHead className="text-white">Ranking</TableHead>
@@ -40,7 +39,10 @@ const Result = ({ auth, results = {} }) => {
             </TableHeader>
             <TableBody>
                 {list.map((c) => (
-                    <TableRow key={c.contestant_id} className={c.placement <= 5 ? "bg-yellow-100" : ""}>
+                    <TableRow
+                        key={c.contestant_id}
+                        className={c.placement <= 5 ? "bg-yellow-100" : ""}
+                    >
                         <TableCell>{c.contestant_number}</TableCell>
                         <TableCell className="flex items-center gap-2">
                             <img
@@ -48,24 +50,50 @@ const Result = ({ auth, results = {} }) => {
                                 alt={c.name}
                                 className="w-8 h-8 rounded-full object-cover"
                             />
-
                             <span>{c.name}</span>
-
-                            {c.top_funder && <Star className="w-4 h-4 text-blue-500" />}
+                            {c.top_funder && (
+                                <Star className="w-4 h-4 text-blue-500" />
+                            )}
                         </TableCell>
-
                         <TableCell>{c.school_uniform ?? "-"}</TableCell>
                         <TableCell>{c.sports ?? "-"}</TableCell>
                         <TableCell>{c.sptve ?? "-"}</TableCell>
                         <TableCell>{c.filipiniana_barong ?? "-"}</TableCell>
                         <TableCell>{c.q_and_a ?? "-"}</TableCell>
                         <TableCell>{c.stage_presence ?? "-"}</TableCell>
-                        <TableCell className="font-semibold">{c.total_scores ?? "-"}</TableCell>
-                        <TableCell className="font-semibold">{c.placement}</TableCell>
+                        <TableCell className="font-semibold">
+                            {c.total_scores ?? "-"}
+                        </TableCell>
+                        <TableCell className="font-semibold">
+                            {c.placement}
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
         </Table>
+    );
+
+    const renderSignatures = () => (
+        <div className="mt-12 space-y-12">
+            {/* First row (3 judges) */}
+            <div className="flex justify-around">
+                {[1, 2, 3].map((num) => (
+                    <div key={num} className="flex flex-col items-center">
+                        <div className="w-40 border-t border-black mb-2"></div>
+                        <span className="text-sm">Judge {num}</span>
+                    </div>
+                ))}
+            </div>
+
+            <div className="flex justify-evenly ">
+                {[4, 5].map((num) => (
+                    <div key={num} className="flex flex-col items-center mt-6">
+                        <div className="w-40 border-t border-black mb-2"></div>
+                        <span className="text-sm">Judge {num}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 
     const handlePrintPDF = (ref, filename) => {
@@ -86,26 +114,36 @@ const Result = ({ auth, results = {} }) => {
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
             <div className="flex gap-4 justify-end mb-4">
-                <Button variant="green"
+                <Button
+                    variant="green"
                     onClick={() => handlePrintPDF(maleRef, "male_results.pdf")}
                 >
                     Print Male Results
                 </Button>
-                <Button variant="pink"
-                    onClick={() => handlePrintPDF(femaleRef, "female_results.pdf")}
+                <Button
+                    variant="pink"
+                    onClick={() =>
+                        handlePrintPDF(femaleRef, "female_results.pdf")
+                    }
                 >
                     Print Female Results
                 </Button>
             </div>
 
             <div ref={maleRef} className="mb-12">
-                <h2 className="text-2xl font-bold mb-4 text-center">Male Contestants</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">
+                    Male Contestants
+                </h2>
                 {renderTable(maleResults)}
+                {renderSignatures()}
             </div>
 
             <div ref={femaleRef}>
-                <h2 className="text-2xl font-bold mb-4 text-center">Female Contestants</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">
+                    Female Contestants
+                </h2>
                 {renderTable(femaleResults)}
+                {renderSignatures()}
             </div>
         </PageLayout>
     );
