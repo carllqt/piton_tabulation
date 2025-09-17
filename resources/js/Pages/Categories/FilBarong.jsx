@@ -1,8 +1,8 @@
-import React from "react";
 import { PageLayout } from "@/Layouts/PageLayout";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useScores } from "@/hooks/useScores";
 import { ScoreTab } from "@/Layouts/ScoreTab";
+import { useState, React } from "react";
 
 const FilBarong = ({ auth, contestants, existingScores }) => {
     const user = auth?.user;
@@ -21,17 +21,30 @@ const FilBarong = ({ auth, contestants, existingScores }) => {
         femaleContestants,
     } = useScores({ contestants, existingScores, maxScore, endpoint });
 
+    const [activeTab, setActiveTab] = useState("male");
+
+    const handleTabChange = (value) => {
+        setActiveTab(value);
+    };
+
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
             <div className="flex justify-center items-start">
                 <div className="w-full">
                     <div className="mb-4">
                         <h2 className="text-2xl font-bold">
-                            Filipiniana / Barong 25%
+                            {activeTab === "male"
+                                ? "Modern Barong"
+                                : "Modern Filipiniana"}{" "}
+                            25%
                         </h2>
                     </div>
 
-                    <Tabs defaultValue="male" className="w-full">
+                    <Tabs
+                        defaultValue="male"
+                        onValueChange={(value) => setActiveTab(value)}
+                        className="w-full"
+                    >
                         <div className="border rounded-xl bg-blue-400 p-4">
                             <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-6">
                                 <TabsTrigger

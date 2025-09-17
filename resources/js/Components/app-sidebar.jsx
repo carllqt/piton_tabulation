@@ -22,7 +22,10 @@ const data = {
         { title: "School Uniform", url: route("school_uniform") },
         { title: "Sports", url: route("sports") },
         { title: "SPTVE", url: route("sptve") },
-        { title: "Filipiniana / Barong", url: route("filipiniana_barong") },
+        {
+            title: "Modern Barong / Filipiniana ",
+            url: route("filipiniana_barong"),
+        },
         { title: "Q & A", url: route("q_and_a") },
         { title: "Stage Presence", url: route("stage_presence") },
         { title: "Result Per Judges", url: route("result_by_judges") },
