@@ -10,7 +10,6 @@ import { TeamSwitcher } from "@/components/team-switcher";
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 
-// Sidebar static data (teams, nav)
 const data = {
     teams: [
         {
