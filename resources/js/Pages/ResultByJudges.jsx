@@ -34,15 +34,15 @@ const ResultByJudges = ({ auth, results = [], category }) => {
     const user = auth?.user;
     const breadcrumbs = [{ label: "Result Per Judges", href: "#" }];
 
-  const handleCategoryChange = (newCategory) => {
-    router.get(
-      route("result_by_judges"),
-      { category: newCategory },
-      { preserveState: true }
-    );
-  };
+    const handleCategoryChange = (newCategory) => {
+        router.get(
+            route("result_by_judges"),
+            { category: newCategory },
+            { preserveState: true }
+        );
+    };
 
-    const judgeLabels = ["Judge 1", "Judge 2", "Judge 3", "Judge 4", "Judge 5"];
+    const judgeLabels = ["Judge1", "Judge2", "Judge3", "Judge4", "Judge5"];
 
     const maleResults = results.filter((c) => c.gender === "male");
     const femaleResults = results.filter((c) => c.gender === "female");
@@ -94,12 +94,15 @@ const ResultByJudges = ({ auth, results = [], category }) => {
     );
 
     const currentCategoryLabel =
-        categories.find((cat) => cat.key === category)?.label || "Select Category";
+        categories.find((cat) => cat.key === category)?.label ||
+        "Select Category";
 
     return (
         <PageLayout user={user} breadcrumbs={breadcrumbs}>
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold">Result Per Judges - {currentCategoryLabel}</h2>
+                <h2 className="text-2xl font-bold">
+                    Result Per Judges - {currentCategoryLabel}
+                </h2>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="yellow">{currentCategoryLabel}</Button>

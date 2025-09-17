@@ -90,16 +90,14 @@ class ResultService
                 'total' => 0,
             ];
 
-            foreach ($contestant->scores as $index => $score) {
+            foreach ($contestant->scores as $score) {
                 $value = $score->$category ?? 0;
 
-                // Force key like Judge 1, Judge 2, ...
-                $judgeLabel = "Judge " . ($index + 1);
+                $judgeName = $score->judge->name;
 
-                $row['scores'][$judgeLabel] = $value;
+                $row['scores'][$judgeName] = $value;
                 $row['total'] += $value;
             }
-
             return $row;
         });
     }
